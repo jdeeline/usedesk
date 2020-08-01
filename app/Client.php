@@ -17,5 +17,4 @@ class Client extends Model {
 	protected $fillable = [
 		'name', 'surname', 'emails', 'phones'
 	];
-	protected $hidden = [];
 }
