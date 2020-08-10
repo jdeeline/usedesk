@@ -24,7 +24,7 @@ export default new VueRouter({
         },
         {
             path: '/clients/add',
-            name: 'addCleint',
+            name: 'addClient',
             component: Form,
             props: { title: "Создание клиента" }
         },

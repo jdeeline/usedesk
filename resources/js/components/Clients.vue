@@ -21,6 +21,11 @@
 						<button type="submit" class="btn btn-success">Найти</button>
 					</div>
 				</form>
+				<div class="text-right">
+					<router-link :to="{ name: 'addClient' }" class="btn btn-sm btn-success mt-2">
+						<i class="fa fa-plus"></i> Добавить
+					</router-link>
+				</div>
 				<table class="table table-striped mt-3">
 					<thead>
 						<th>ID</th>

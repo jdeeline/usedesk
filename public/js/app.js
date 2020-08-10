@@ -2040,6 +2040,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2157,10 +2162,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    title: {
+      type: String,
+      required: true
+    }
+  },
   data: function data() {
     return {
       editing: false,
-      client: {}
+      client: {
+        emails: [],
+        phones: []
+      }
     };
   },
   methods: {
@@ -2196,12 +2210,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
-    }
-  },
-  props: {
-    title: {
-      type: String,
-      required: true
     }
   }
 });
@@ -38027,6 +38035,25 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-right" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-sm btn-success mt-2",
+                    attrs: { to: { name: "addClient" } }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-plus" }),
+                    _vm._v(" Добавить\n\t\t\t\t")
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
             _c("table", { staticClass: "table table-striped mt-3" }, [
               _vm._m(1),
               _vm._v(" "),
@@ -38178,35 +38205,37 @@ var render = function() {
         }
       },
       [
-        _c("div", { staticClass: "row my-2" }, [
-          _c("label", { staticClass: "col-md-3 form-col-label" }, [
-            _vm._v("ID")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-9" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.client.id,
-                  expression: "client.id"
-                }
-              ],
-              staticClass: "form-control form-control-plaintext",
-              attrs: { type: "text", required: "" },
-              domProps: { value: _vm.client.id },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+        _vm.editing
+          ? _c("div", { staticClass: "row my-2" }, [
+              _c("label", { staticClass: "col-md-3 form-col-label" }, [
+                _vm._v("ID")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-9" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.client.id,
+                      expression: "client.id"
+                    }
+                  ],
+                  staticClass: "form-control form-control-plaintext",
+                  attrs: { type: "text", required: "" },
+                  domProps: { value: _vm.client.id },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.client, "id", $event.target.value)
+                    }
                   }
-                  _vm.$set(_vm.client, "id", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
+                })
+              ])
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "row my-2" }, [
           _c("label", { staticClass: "col-md-3 form-col-label" }, [
@@ -53707,11 +53736,6 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-var api_token = document.head.querySelector('meta[name="api-token"]');
-
-if (api_token) {
-  window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + api_token.content;
-}
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -53974,7 +53998,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     }
   }, {
     path: '/clients/add',
-    name: 'addCleint',
+    name: 'addClient',
     component: _components_Form__WEBPACK_IMPORTED_MODULE_4__["default"],
     props: {
       title: "Создание клиента"

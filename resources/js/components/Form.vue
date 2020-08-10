@@ -2,7 +2,7 @@
 	<div class="card">
 		<div class="card-header">{{ title }}</div>
 		<form class="card-body" @submit.prevent="onSave">
-			<div class="row my-2">
+			<div v-if="editing" class="row my-2">
 				<label class="col-md-3 form-col-label">ID</label>
 				<div class="col-md-9">
 					<input type="text" class="form-control form-control-plaintext" v-model="client.id" required>
@@ -63,10 +63,19 @@
 
 <script>
 export default {
+    props: {
+        title: {
+            type: String,
+            required: true
+        }
+    },
     data() {
         return {
             editing: false,
-            client: {}
+            client: {
+				emails: [],
+				phones: []
+			}
         }
     },
     methods: {
@@ -100,12 +109,6 @@ export default {
                 .catch(error => {
 					console.log(error)
 				})
-        }
-    },
-    props: {
-        title: {
-            type: String,
-            required: true
         }
     }
 }

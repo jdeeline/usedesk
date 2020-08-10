@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:api')->group(function () {
+Route::group([
+		'middleware' => [ 'auth:api', 'api_log' ]
+	], function () {
 	Route::apiResource('/clients', 'Api\ClientController');
 });
